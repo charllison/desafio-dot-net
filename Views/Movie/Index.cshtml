@@ -1,0 +1,62 @@
+@model ProjetoDesafioInForma.Models.MovieModel
+
+@using (Html.BeginForm("Index", "Movie", FormMethod.Post)) {
+        
+    <h3>Learn all about movies</h3>
+    <div class="form-horizontal">
+        
+        <span asp-validation-for="@Model.movieResult.title" class="text-danger"></span>
+        <div class="form-group">            
+            <div class="col-md-10">
+                <input asp-for="@Model.movieResult.title" class="form-control" placeholder="title of the film" />
+                <input type="submit" value="search" class="btn btn-primary" />
+            </div>
+
+        </div>
+    </div>
+}
+
+<div style="width:60%; margin:0 auto;">
+    <table id="tbmovie" class="display" border="0">
+        <thead>  
+            <tr>  
+                <th>&nbsp;</th>  
+                <th>&nbsp;</th> 
+                <th>&nbsp;</th>
+            </tr> 
+        </thead>
+        <tbody>
+            @{
+                // list of the movie
+                if (Model.results != null) {
+                    foreach (var item in Model.results) {
+                        <tr>
+                            <td><img src="https://image.tmdb.org/t/p/w92/@Html.DisplayFor(modelItem => item.poster_path)" alt="" title="" /></td>
+                            <td>&nbsp; @Html.DisplayFor(modelItem => item.title)</td>
+                            <td><a href="Movie/Details/@Html.DisplayFor(modelItem => item.id)">details</a></td>
+                        </tr>
+                    }   
+                }
+            }            
+        </tbody>
+    </table>  
+</div>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+    (function($) {     
+        $('#tbmovie').DataTable( {
+            paging: true,
+            filter: false,
+            pageLength: 3,
+            bLengthChange: false,
+            ordering: false
+        } );
+    })(jQuery);
+    
+</script>
+
+

@@ -1,0 +1,20 @@
+
+<h3>Movie details</h3>
+
+<div class="form-horizontal">
+    Title: @ViewBag.titleMovie
+    
+    <br /><br />
+
+    <img src="@ViewBag.bannerMoviel" alt="" title="" />
+
+    <br /><br />
+
+    Overview: <br />
+    @ViewBag.overviewMoviel
+
+    <br /><br />
+    @Html.ActionLink("back to search", "Index")
+</div>
+
+
